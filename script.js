@@ -12,32 +12,32 @@ let songs = [
   {
     title: "afgan",
     artist: "Pixabay",
-    src: "afgan.mp3",
-    cover: "cover1.jpg"
+    src: "assets/afgan.mp3",
+    cover: "afgan.jpg"
   },
   {
     title: "opalite",
     artist: "Pixabay",
-    src: "opalite.mp3",
-    cover: "cover2.jpg"
+    src: "assets/opalite.mp3",
+    cover: "opalite.jpg"
   },
   {
     title: "tulus",
     artist: "Pixabay",
-    src: "tulus.mp3",
-    cover: "cover2.jpg"
+    src: "assets/tulus.mp3",
+    cover: "tulus.jpg"
   },  
   {
     title: "kota ini",
     artist: "Pixabay",
-    src: "kotaini.mp3",
-    cover: "cover2.jpg" 
+    src: "assets/kotaini.mp3",
+    cover: "nadhif.jpg" 
   },
   {
     title: "teenagers",
     artist: "Pixabay",
-    src: "teenagers.mp3",
-    cover: "cover2.jpg" 
+    src: "assets/teenagers.mp3",
+    cover: "teenagers.jpg" 
   },
 ];
 
