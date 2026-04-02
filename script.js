@@ -1,21 +1,23 @@
 const audio = document.getElementById("audio");
 const progress = document.getElementById("progress");
-const nowPlaying = document.getElementById("nowPlaying");
-const artistName = document.getElementById("artistName");
-const playerCover = document.getElementById("playerCover");
+const volume = document.getElementById("volume");
+
+const title = document.getElementById("title");
+const artist = document.getElementById("artist");
+const cover = document.getElementById("cover");
+
 const playBtn = document.getElementById("playBtn");
-const songList = document.getElementById("songList");
 
 let songs = [
   {
-    title: "Song 1",
-    artist: "Artist 1",
+    title: "Calm Piano",
+    artist: "Pixabay",
     src: "song1.mp3",
     cover: "cover1.jpg"
   },
   {
-    title: "Song 2",
-    artist: "Artist 2",
+    title: "Ambient Chill",
+    artist: "Pixabay",
     src: "song2.mp3",
     cover: "cover2.jpg"
   }
@@ -23,17 +25,18 @@ let songs = [
 
 let currentIndex = 0;
 
-/* Render list */
-function renderSongs() {
-  songList.innerHTML = "";
+/* RENDER */
+function renderSongs(list = songs) {
+  const container = document.getElementById("songList");
+  container.innerHTML = "";
 
-  songs.forEach((song, index) => {
-    songList.innerHTML += `
-      <div class="song" onclick="playSong(${index})">
-        <img src="${song.cover}" class="cover">
+  list.forEach((song, i) => {
+    container.innerHTML += `
+      <div class="song" onclick="playSong(${i})">
+        <img src="${song.cover}">
         <div>
-          <div class="title">${song.title}</div>
-          <div class="artist">${song.artist}</div>
+          <div>${song.title}</div>
+          <div>${song.artist}</div>
         </div>
       </div>
     `;
@@ -42,23 +45,32 @@ function renderSongs() {
 
 renderSongs();
 
-/* Play song */
+/* PLAY */
 function playSong(index) {
   const song = songs[index];
 
   audio.src = song.src;
   audio.play();
 
-  nowPlaying.innerText = song.title;
-  artistName.innerText = song.artist;
-  playerCover.src = song.cover;
+  title.innerText = song.title;
+  artist.innerText = song.artist;
+  cover.src = song.cover;
 
   currentIndex = index;
 
   playBtn.innerHTML = '<i class="fa fa-pause"></i>';
+
+  highlightActive(index);
 }
 
-/* Toggle */
+/* HIGHLIGHT */
+function highlightActive(index) {
+  document.querySelectorAll(".song").forEach((el, i) => {
+    el.classList.toggle("active", i === index);
+  });
+}
+
+/* CONTROL */
 function togglePlay() {
   if (audio.paused) {
     audio.play();
@@ -69,31 +81,62 @@ function togglePlay() {
   }
 }
 
-/* Next */
 function nextSong() {
   currentIndex = (currentIndex + 1) % songs.length;
   playSong(currentIndex);
 }
 
-/* Prev */
 function prevSong() {
   currentIndex = (currentIndex - 1 + songs.length) % songs.length;
   playSong(currentIndex);
 }
 
-/* Auto next */
+/* AUTO NEXT */
 audio.addEventListener("ended", nextSong);
 
-/* Progress update */
+/* PROGRESS */
 audio.addEventListener("timeupdate", () => {
-  if (audio.duration) {
-    progress.value = (audio.currentTime / audio.duration) * 100;
-  }
+  progress.value = (audio.currentTime / audio.duration) * 100 || 0;
 });
 
-/* Seek */
 progress.addEventListener("input", () => {
-  if (audio.duration) {
-    audio.currentTime = (progress.value / 100) * audio.duration;
-  }
+  audio.currentTime = (progress.value / 100) * audio.duration;
+});
+
+/* VOLUME */
+volume.value = 0.5;
+audio.volume = 0.5;
+
+volume.addEventListener("input", () => {
+  audio.volume = volume.value;
+});
+
+/* NAVIGATION */
+function showPage(page) {
+  document.getElementById("homePage").classList.add("hidden");
+  document.getElementById("searchPage").classList.add("hidden");
+  document.getElementById("libraryPage").classList.add("hidden");
+
+  document.getElementById(page + "Page").classList.remove("hidden");
+}
+
+/* SEARCH */
+document.getElementById("searchInput").addEventListener("input", (e) => {
+  let val = e.target.value.toLowerCase();
+
+  let filtered = songs.filter(song =>
+    song.title.toLowerCase().includes(val)
+  );
+
+  const container = document.getElementById("searchResults");
+  container.innerHTML = "";
+
+  filtered.forEach((song, i) => {
+    container.innerHTML += `
+      <div class="song" onclick="playSong(${i})">
+        <img src="${song.cover}">
+        <div>${song.title}</div>
+      </div>
+    `;
+  });
 });
