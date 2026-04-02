@@ -11,50 +11,68 @@ const playBtn = document.getElementById("playBtn");
 let songs = [
   {
     title: "afgan",
-    artist: "Pixabay",
+    artist: "unknown",
     src: "assets/afgan.mp3",
-    cover: "assets/afgan.jpg"
+    cover: "assets/afgan.jpg",
+    liked: false
   },
   {
-    title: "opalite",
-    artist: "Pixabay",
+    title: "kota ini tak sama tanpa mu",
+    artist: "unknown",
+    src: "assets/kotaini.mp3",
+    cover: "assets/nadhif.jpg",
+    liked: false
+  }, 
+  {
+    title: "taylor swift",
+    artist: "unknown",
     src: "assets/opalite.mp3",
-    cover: "assets/opalite.jpg"
+    cover: "assets/opalite.jpg",
+    liked: false
   },
   {
     title: "tulus",
-    artist: "Pixabay",
+    artist: "unknown",
     src: "assets/tulus.mp3",
-    cover: "assets/tulus.jpg"
-  },  
-  {
-    title: "kota ini",
-    artist: "Pixabay",
-    src: "assets/kotaini.mp3",
-    cover: "assets/nadhif.jpg" 
+    cover: "assets/tulus.jpg",
+    liked: false
   },
   {
-    title: "teenagers",
-    artist: "Pixabay",
+    title: "teenagers mcr",
+    artist: "unknown",
     src: "assets/teenagers.mp3",
-    cover: "assets/teenagers.jpg" 
+    cover: "assets/teenagers.jpg",
+    liked: false
+  },
+  {
+    title: "about you",
+    artist: "unknown",
+    src: "assets/afgan.mp3",
+    cover: "assets/aboutyou.jpg",
+    liked: false
   },
 ];
 
 let currentIndex = 0;
 
 /* RENDER */
-function renderSongs(list = songs) {
-  const container = document.getElementById("songList");
+function renderSongs(list = songs, containerId = "songList") {
+  const container = document.getElementById(containerId);
   container.innerHTML = "";
 
   list.forEach((song, i) => {
     container.innerHTML += `
       <div class="song" onclick="playSong(${i})">
-        <img src="${song.cover}">
-        <div>
-          <div>${song.title}</div>
-          <div>${song.artist}</div>
+        <div class="song-left">
+          <img src="${song.cover}">
+          <div>
+            <div>${song.title}</div>
+            <div style="font-size:12px;color:gray">${song.artist}</div>
+          </div>
+        </div>
+
+        <div onclick="toggleLike(event, ${i})">
+          ${song.liked ? "❤️" : "🤍"}
         </div>
       </div>
     `;
@@ -78,14 +96,27 @@ function playSong(index) {
 
   playBtn.innerHTML = '<i class="fa fa-pause"></i>';
 
-  highlightActive(index);
+  highlight(index);
 }
 
 /* HIGHLIGHT */
-function highlightActive(index) {
+function highlight(index) {
   document.querySelectorAll(".song").forEach((el, i) => {
     el.classList.toggle("active", i === index);
   });
+}
+
+/* LIKE */
+function toggleLike(e, index) {
+  e.stopPropagation();
+  songs[index].liked = !songs[index].liked;
+  renderSongs();
+}
+
+/* LIBRARY */
+function renderLibrary() {
+  let liked = songs.filter(s => s.liked);
+  renderSongs(liked, "likedList");
 }
 
 /* CONTROL */
@@ -136,6 +167,8 @@ function showPage(page) {
   document.getElementById("libraryPage").classList.add("hidden");
 
   document.getElementById(page + "Page").classList.remove("hidden");
+
+  if (page === "library") renderLibrary();
 }
 
 /* SEARCH */
@@ -143,18 +176,9 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
   let val = e.target.value.toLowerCase();
 
   let filtered = songs.filter(song =>
-    song.title.toLowerCase().includes(val)
+    song.title.toLowerCase().includes(val) ||
+    song.artist.toLowerCase().includes(val)
   );
 
-  const container = document.getElementById("searchResults");
-  container.innerHTML = "";
-
-  filtered.forEach((song, i) => {
-    container.innerHTML += `
-      <div class="song" onclick="playSong(${i})">
-        <img src="${song.cover}">
-        <div>${song.title}</div>
-      </div>
-    `;
-  });
+  renderSongs(filtered, "searchResults");
 });
