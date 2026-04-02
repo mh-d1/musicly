@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   background: #121212;
   color: white;
 }
@@ -10,6 +10,7 @@ body {
   height: 100vh;
 }
 
+/* SIDEBAR */
 .sidebar {
   width: 200px;
   background: black;
@@ -19,12 +20,14 @@ body {
 .sidebar p {
   cursor: pointer;
   padding: 10px;
+  font-weight: 600;
 }
 
 .sidebar p:hover {
   color: #1DB954;
 }
 
+/* MAIN */
 .main {
   flex: 1;
   padding: 20px;
@@ -37,27 +40,41 @@ body {
 
 /* SONG */
 .song {
-  display: flex;
-  gap: 10px;
-  padding: 10px;
+  display: grid;
+  grid-template-columns: 50px 1fr 80px;
+  align-items: center;
   background: #181818;
+  padding: 10px;
   margin-bottom: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .song:hover {
   background: #282828;
 }
 
-.song.active {
-  background: #1DB954;
-}
-
 .song img {
   width: 50px;
   height: 50px;
+}
+
+.song-info {
+  margin-left: 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.like-btn {
+  cursor: pointer;
+}
+
+.add-btn {
+  cursor: pointer;
 }
 
 /* PLAYER */
