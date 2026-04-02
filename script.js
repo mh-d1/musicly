@@ -33,6 +33,12 @@ let songs = [
     src: "kotaini.mp3",
     cover: "cover2.jpg" 
   },
+  {
+    title: "teenagers",
+    artist: "Pixabay",
+    src: "teenagers.mp3",
+    cover: "cover2.jpg" 
+  },
 ];
 
 let currentIndex = 0;
