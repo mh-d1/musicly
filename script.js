@@ -57,6 +57,8 @@ let songs = [
 
 let playlists = [];
 let currentIndex = 0;
+let isRepeat = false;
+let isAutoNext = true;
 
 /* RENDER SONG */
 function renderSongs(list = songs, containerId = "songList") {
@@ -97,6 +99,12 @@ function playSong(index) {
   artist.innerText = song.artist;
   cover.src = song.cover;
 
+  document.getElementById("np-cover").src = song.cover;
+  document.getElementById("np-title").innerText = song.title;
+  document.getElementById("np-artist").innerText = song.artist;
+
+  document.getElementById("nowPlaying").classList.remove("hidden");
+
   currentIndex = index;
 
   playBtn.innerHTML = '<i class="fa fa-pause"></i>';
@@ -123,7 +131,18 @@ function prevSong() {
   playSong(currentIndex);
 }
 
-audio.addEventListener("ended", nextSong);
+function closeNowPlaying() {
+  document.getElementById("nowPlaying").classList.add("hidden");
+}
+
+audio.addEventListener("ended", () => {
+  if (isRepeat) {
+    audio.currentTime = 0;
+    audio.play();
+  } else if (isAutoNext) {
+    nextSong();
+  }
+});
 
 /* PROGRESS */
 audio.addEventListener("timeupdate", () => {
@@ -141,6 +160,25 @@ audio.volume = 0.5;
 volume.addEventListener("input", () => {
   audio.volume = volume.value;
 });
+function toggleRepeat() {
+  isRepeat = !isRepeat;
+  if (isRepeat) isAutoNext = false;
+  updateModeUI();
+}
+
+function toggleAutoNext() {
+  isAutoNext = !isAutoNext;
+  if (isAutoNext) isRepeat = false;
+  updateModeUI();
+}
+
+function updateModeUI() {
+  document.getElementById("repeatBtn").style.color =
+    isRepeat ? "lime" : "white";
+
+  document.getElementById("autoNextBtn").style.color =
+    isAutoNext ? "lime" : "white";
+}
 
 /* LIKE */
 function toggleLike(e, index) {
