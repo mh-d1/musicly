@@ -10,16 +10,29 @@ const playBtn = document.getElementById("playBtn");
 
 let songs = [
   {
-    title: "Calm Piano",
+    title: "afgan",
     artist: "Pixabay",
-    src: "song1.mp3",
+    src: "afgan.mp3",
     cover: "cover1.jpg"
   },
   {
-    title: "Ambient Chill",
+    title: "opalite",
     artist: "Pixabay",
-    src: "song2.mp3",
+    src: "opalite.mp3",
     cover: "cover2.jpg"
+  },
+  {
+    title: "tulus",
+    artist: "Pixabay",
+    src: "tulus.mp3",
+    cover: "cover2.jpg"
+  },  
+  {
+    title: "kota ini",
+    artist: "Pixabay",
+    src: "kotaini.mp3",
+    cover: "cover2.jpg" 
+  },
   }
 ];
 
