@@ -33,7 +33,6 @@ let songs = [
     src: "kotaini.mp3",
     cover: "cover2.jpg" 
   },
-  }
 ];
 
 let currentIndex = 0;
