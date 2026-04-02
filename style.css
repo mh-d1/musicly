@@ -1,20 +1,28 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background: #121212;
   color: white;
 }
 
-/* Layout */
 .container {
   display: flex;
   height: 100vh;
 }
 
 .sidebar {
-  width: 220px;
-  background: #000;
+  width: 200px;
+  background: black;
   padding: 20px;
+}
+
+.sidebar p {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.sidebar p:hover {
+  color: #1DB954;
 }
 
 .main {
@@ -23,98 +31,69 @@ body {
   overflow-y: auto;
 }
 
-/* Song List */
+.hidden {
+  display: none;
+}
+
+/* SONG */
 .song {
   display: flex;
-  align-items: center;
-  gap: 15px;
-  background: #181818;
+  gap: 10px;
   padding: 10px;
+  background: #181818;
   margin-bottom: 10px;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.25s;
+  transition: 0.2s;
 }
 
 .song:hover {
   background: #282828;
-  transform: scale(1.02);
 }
 
-.cover {
+.song.active {
+  background: #1DB954;
+}
+
+.song img {
   width: 50px;
   height: 50px;
-  border-radius: 5px;
 }
 
-.title {
-  font-weight: bold;
-}
-
-.artist {
-  font-size: 12px;
-  color: gray;
-}
-
-/* Player */
+/* PLAYER */
 .player {
   position: fixed;
   bottom: 0;
   width: 100%;
   background: #181818;
-  padding: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  padding: 10px;
 }
 
-.player-left {
+.left {
   display: flex;
-  align-items: center;
   gap: 10px;
+  align-items: center;
 }
 
-.player-left img {
+.left img {
   width: 50px;
-  height: 50px;
-  border-radius: 5px;
 }
 
-.player-center button {
+.center button {
   background: none;
   border: none;
   color: white;
   font-size: 18px;
   margin: 0 10px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.player-center button:hover {
+.center button:hover {
   color: #1DB954;
-  transform: scale(1.2);
 }
 
-.player-center button:active {
-  transform: scale(0.9);
-}
-
-.player-right input {
-  width: 200px;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .sidebar {
-    display: none;
-  }
-
-  .player {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .player-right input {
-    width: 100%;
-  }
+.right input {
+  margin: 5px;
 }
