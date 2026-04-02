@@ -13,31 +13,31 @@ let songs = [
     title: "afgan",
     artist: "Pixabay",
     src: "assets/afgan.mp3",
-    cover: "afgan.jpg"
+    cover: "assets/afgan.jpg"
   },
   {
     title: "opalite",
     artist: "Pixabay",
     src: "assets/opalite.mp3",
-    cover: "opalite.jpg"
+    cover: "assets/opalite.jpg"
   },
   {
     title: "tulus",
     artist: "Pixabay",
     src: "assets/tulus.mp3",
-    cover: "tulus.jpg"
+    cover: "assets/tulus.jpg"
   },  
   {
     title: "kota ini",
     artist: "Pixabay",
     src: "assets/kotaini.mp3",
-    cover: "nadhif.jpg" 
+    cover: "assets/nadhif.jpg" 
   },
   {
     title: "teenagers",
     artist: "Pixabay",
     src: "assets/teenagers.mp3",
-    cover: "teenagers.jpg" 
+    cover: "assets/teenagers.jpg" 
   },
 ];
 
