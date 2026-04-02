@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Musicly</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Musicly</h2>
+    <p onclick="showPage('home')">🏠 Home</p>
+    <p onclick="showPage('search')">🔍 Search</p>
+    <p onclick="showPage('library')">📚 Library</p>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HOME -->
+    <div id="homePage">
+      <h1>Home</h1>
+      <input type="file" id="upload" accept="audio/*">
+      <div id="songList"></div>
+    </div>
+
+    <!-- SEARCH -->
+    <div id="searchPage" class="hidden">
+      <h1>Search</h1>
+      <input type="text" id="searchInput" placeholder="Search song...">
+      <div id="searchResults"></div>
+    </div>
+
+    <!-- LIBRARY -->
+    <div id="libraryPage" class="hidden">
+      <h1>Library</h1>
+
+      <button onclick="createPlaylist()">+ Create Playlist</button>
+
+      <h2>Playlists</h2>
+      <div id="playlistContainer"></div>
+
+      <h2>Liked Songs</h2>
+      <div id="likedList"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PLAYER -->
+<div class="player">
+
+  <div class="left">
+    <img id="cover">
+    <div>
+      <div id="title">No song</div>
+      <div id="artist"></div>
+    </div>
+  </div>
+
+  <div class="center">
+    <button onclick="prevSong()"><i class="fa fa-backward"></i></button>
+    <button onclick="togglePlay()" id="playBtn"><i class="fa fa-play"></i></button>
+    <button onclick="nextSong()"><i class="fa fa-forward"></i></button>
+  </div>
+
+  <div class="right">
+    <input type="range" id="progress" value="0">
+    <input type="range" id="volume" min="0" max="1" step="0.01">
+  </div>
+
+</div>
+
+<audio id="audio"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
